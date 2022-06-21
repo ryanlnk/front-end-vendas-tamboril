@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import ButtonAdd from '../../components/ButtonAdd';
+import ButtonRemove from '../../components/ButtonRemove';
 
 const Customers = () => {
   const navigate = useNavigate();
@@ -15,6 +16,11 @@ const Customers = () => {
     }
     getCustomers();
   }, []);
+
+  async function deleteCustomer(id) {
+    await axios.delete(`https://localhost:7097/customers/${id}`);
+    setCustomers(customers.filter((customer) => customer.id !== id));
+  }
 
   function add() {
     navigate('/customersform');
@@ -48,6 +54,10 @@ const Customers = () => {
                   <td>{customer.birthDate}</td>
                   <td>
                     {<Link to={`/customersform/${customer.id}`}>Editar</Link>}
+                    <ButtonRemove
+                      deleteFunction={deleteCustomer}
+                      parameter={customer.id}
+                    />
                   </td>
                 </tr>
               ))}
