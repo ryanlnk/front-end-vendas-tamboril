@@ -29,7 +29,7 @@ const Customers = () => {
   if (customers.length !== 0) {
     return (
       <>
-        <h1 className="text-2xl font-bold">Lista de clientes</h1>
+        <h1 className="ml-4 text-2xl font-bold">Lista de clientes</h1>
 
         <ButtonAdd add={add} />
 

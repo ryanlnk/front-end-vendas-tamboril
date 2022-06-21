@@ -61,9 +61,9 @@ const Customers = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Clientes</h1>
+      <h1 className="ml-5 text-2xl font-bold">Clientes</h1>
 
-      <form onSubmit={createCustomer}>
+      <form className="m-5 w-5/6 mx-auto" onSubmit={createCustomer}>
         <label className="block mt-4" htmlFor="name">
           Nome
         </label>
