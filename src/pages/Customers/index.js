@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import ButtonAdd from '../../components/ButtonAdd';
 
@@ -46,7 +46,9 @@ const Customers = () => {
                   <td>{customer.cpf}</td>
                   <td>{customer.contact}</td>
                   <td>{customer.birthDate}</td>
-                  <td>{}</td>
+                  <td>
+                    {<Link to={`/customersform/${customer.id}`}>Editar</Link>}
+                  </td>
                 </tr>
               ))}
             </tbody>

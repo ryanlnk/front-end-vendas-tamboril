@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ButtonSave from '../../components/ButtonSave';
 
@@ -13,16 +13,44 @@ const Customers = () => {
   const [contact, setContatc] = useState('');
   const [birthDate, setBirthDate] = useState('');
 
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      async function getCustomer() {
+        const response = await axios.get(
+          `https://localhost:7097/customers/${params.id}`,
+        );
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setCpf(response.data.cpf);
+        setContatc(response.data.contact);
+        setBirthDate(response.data.birthDate);
+      }
+      getCustomer();
+    }
+  }, [params.id]);
+
   async function createCustomer(e) {
     e.preventDefault();
 
-    await axios.post('https://localhost:7097/customers', {
-      name,
-      email,
-      cpf,
-      contact,
-      birthDate,
-    });
+    if (!params.id) {
+      await axios.post('https://localhost:7097/customers', {
+        name,
+        email,
+        cpf,
+        contact,
+        birthDate,
+      });
+    } else {
+      await axios.put(`https://localhost:7097/customers/${params.id}`, {
+        name,
+        email,
+        cpf,
+        contact,
+        birthDate,
+      });
+    }
     setName('');
     setEmail('');
     setCpf('');
