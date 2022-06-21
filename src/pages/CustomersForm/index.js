@@ -61,53 +61,69 @@ const Customers = () => {
 
   return (
     <div>
-      <h1>Clientes</h1>
+      <h1 className="text-2xl font-bold">Clientes</h1>
 
       <form onSubmit={createCustomer}>
+        <label className="block mt-4" htmlFor="name">
+          Nome
+        </label>
         <input
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
           type="text"
           name="name"
           id="name"
           value={name}
           onChange={({ target }) => setName(target.value)}
         />
-        <label htmlFor="name">Nome</label>
 
+        <label className="block mt-4" htmlFor="email">
+          E-mail
+        </label>
         <input
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
           type="text"
           name="email"
           id="email"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
         />
-        <label htmlFor="email">E-mail</label>
 
+        <label className="block mt-4" htmlFor="cpf">
+          CPF
+        </label>
         <input
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
           type="text"
           name="cpf"
           id="cpf"
           value={cpf}
           onChange={({ target }) => setCpf(target.value)}
         />
-        <label htmlFor="cpf">CPF</label>
 
+        <label className="block mt-4" htmlFor="contact">
+          Contato
+        </label>
         <input
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
           type="text"
           name="contact"
           id="contact"
           value={contact}
           onChange={({ target }) => setContatc(target.value)}
         />
-        <label htmlFor="contact">Contato</label>
 
+        <label className="block mt-4" htmlFor="birthDate">
+          Data de Nascimento
+        </label>
         <input
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
           type="text"
           name="birthDate"
           id="birthDate"
           value={birthDate}
           onChange={({ target }) => setBirthDate(target.value)}
         />
-        <label htmlFor="birthDate">Data de Nascimento</label>
+
         <ButtonSave />
       </form>
     </div>
