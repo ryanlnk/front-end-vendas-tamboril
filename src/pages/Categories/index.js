@@ -25,7 +25,7 @@ const Categories = () => {
     navigate('/categoriesform');
   }
 
-  if (customers.length !== 0) {
+  if (categories.length !== 0) {
     return (
       <>
         <h1 className="ml-4 text-2xl font-bold">Categorias</h1>

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Customers from './pages/Customers';
 import CustomersForm from './pages/CustomersForm';
 import Categories from './pages/Categories';
+import CategoriesForm from './pages/CategoriesForm';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const AppRoutes = () => {
 
       {/* Categories */}
       <Route path="/categories" element={<Categories />} />
+      <Route path="/categoriesform" element={<CategoriesForm />} />
+      <Route path="/categoriesform/:id" element={<CategoriesForm />} />
     </Routes>
   );
 };
