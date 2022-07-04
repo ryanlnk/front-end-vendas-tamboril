@@ -27,6 +27,17 @@ const Sidebar = () => {
             </Link>
           </li>
         </ul>
+
+        <ul className="space-y-2 tracking-wide mt-1">
+          <li>
+            <Link
+              className="px-4 py-3 flex items-center space-x-4 bg-gray-300 rounded-xl text-gray-900 hover:text-gray-100"
+              to={'/categories'}
+            >
+              Categorias
+            </Link>
+          </li>
+        </ul>
       </div>
     </aside>
   );
