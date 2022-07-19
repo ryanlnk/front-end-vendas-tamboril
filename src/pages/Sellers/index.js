@@ -1,34 +1,35 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import ButtonAdd from '../../components/ButtonAdd';
 import ButtonRemove from '../../components/ButtonRemove';
 
-const Payments = () => {
+const Sellers = () => {
   const navigate = useNavigate();
-  const [payments, setPayments] = useState([]);
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    async function getPayments() {
-      const response = await axios.get('https://localhost:7097/payments');
-      setPayments(response.data);
+    async function getSellers() {
+      const response = await axios.get('https://localhost:7097/sellers');
+      setSellers(response.data);
     }
-    getPayments();
+    getSellers();
   }, []);
 
-  async function deletePayment(id) {
-    await axios.delete(`https://localhost:7097/payments/${id}`);
-    setPayments(payments.filter((payment) => payment.id !== id));
+  async function deleteSeller(id) {
+    await axios.delete(`https://localhost:7097/sellers/${id}`);
+    setSellers(sellers.filter((seller) => seller.id !== id));
   }
 
   function add() {
-    navigate('/paymentsform');
+    navigate('/sellersform');
   }
 
-  if (payments.length !== 0) {
+  if (sellers.length !== 0) {
     return (
       <>
-        <h1 className="ml-4 text-2xl font-bold">Pagementos</h1>
+        <h1 className="ml-4 text-2xl font-bold">Vendedores</h1>
 
         <ButtonAdd add={add} />
 
@@ -41,17 +42,17 @@ const Payments = () => {
           </thead>
 
           <tbody>
-            {payments.map((payment) => (
+            {sellers.map((seller) => (
               <tr
                 className="border-b border-gray-200 hover:bg-gray-100"
-                key={payment.id}
+                key={seller.id}
               >
-                <td className="px-4 py-2">{payment.name}</td>
+                <td className="px-4 py-2">{seller.name}</td>
                 <td className="px-4 py-2 inline-flex">
                   {
                     <Link
                       className="text-indigo-800 hover:text-indigo-200 hover:scale-125 active:scale-95 ease-in-out duration-100"
-                      to={`/paymentsform/${payment.id}`}
+                      to={`/sellersform/${seller.id}`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -70,8 +71,8 @@ const Payments = () => {
                     </Link>
                   }
                   <ButtonRemove
-                    deleteFunction={deletePayment}
-                    parameter={payment.id}
+                    deleteFunction={deleteSeller}
+                    parameter={seller.id}
                   />
                 </td>
               </tr>
@@ -83,7 +84,7 @@ const Payments = () => {
   } else {
     return (
       <>
-        <h1 className="ml-4 text-2xl font-bold">Pagamentos</h1>
+        <h1 className="ml-4 text-2xl font-bold">Vendedores</h1>
 
         <div>
           <ButtonAdd add={add} />
@@ -95,4 +96,4 @@ const Payments = () => {
   }
 };
 
-export default Payments;
+export default Sellers;

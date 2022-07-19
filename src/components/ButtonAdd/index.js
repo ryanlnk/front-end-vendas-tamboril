@@ -2,7 +2,7 @@ import React from 'react';
 
 const ButtonAdd = ({ add }) => {
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end mr-8">
       <button
         className="text-gray-900 items-center px-3 h-12 hover:text-gray-100 drop-shadow-lg rounded-full border bg-gray-300 hover:scale-105 active:scale-95 ease-in-out duration-100"
         type="submit"

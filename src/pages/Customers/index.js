@@ -29,7 +29,7 @@ const Customers = () => {
   if (customers.length !== 0) {
     return (
       <>
-        <h1 className="ml-4 text-2xl font-bold">Lista de clientes</h1>
+        <h1 className="ml-4 text-2xl font-bold">Clientes</h1>
 
         <ButtonAdd add={add} />
 
@@ -37,10 +37,8 @@ const Customers = () => {
           <thead>
             <tr className="text-left border-b border-gray-300">
               <th className="px-4 py-1">Nome</th>
-              <th className="px-4 py-1">E-mail</th>
               <th className="px-4 py-1">CPF</th>
               <th className="px-4 py-1">Contato</th>
-              <th className="px-4 py-1">Data de Nascimento</th>
               <th className="px-4 py-1">Opções</th>
             </tr>
           </thead>
@@ -52,10 +50,8 @@ const Customers = () => {
                 key={customer.id}
               >
                 <td className="px-4 py-2">{customer.name}</td>
-                <td className="px-4 py-2">{customer.email}</td>
                 <td className="px-4 py-2">{customer.cpf}</td>
                 <td className="px-4 py-2">{customer.contact}</td>
-                <td className="px-4 py-2">{customer.birthDate}</td>
                 <td className="px-4 py-2 inline-flex">
                   {
                     <Link
@@ -92,7 +88,13 @@ const Customers = () => {
   } else {
     return (
       <>
-        <p>Carregando...</p>
+        <h1 className="ml-4 text-2xl font-bold">Clientes</h1>
+
+        <div>
+          <ButtonAdd add={add} />
+        </div>
+
+        <p className="ml-4">Carregando...</p>
       </>
     );
   }

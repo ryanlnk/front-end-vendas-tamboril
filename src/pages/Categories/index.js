@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import ButtonAdd from '../../components/ButtonAdd';
 import ButtonRemove from '../../components/ButtonRemove';
 
@@ -83,7 +84,13 @@ const Categories = () => {
   } else {
     return (
       <>
-        <p>Carregando...</p>
+        <h1 className="ml-4 text-2xl font-bold">Categorias</h1>
+
+        <div>
+          <ButtonAdd add={add} />
+        </div>
+
+        <p className="ml-4">Carregando...</p>
       </>
     );
   }

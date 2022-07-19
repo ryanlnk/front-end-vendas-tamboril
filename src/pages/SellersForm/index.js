@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ButtonSave from '../../components/ButtonSave';
 
-const Categories = () => {
+const Sellers = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -13,37 +13,37 @@ const Categories = () => {
 
   useEffect(() => {
     if (params.id) {
-      async function getCategory() {
+      async function getSellers() {
         const response = await axios.get(
-          `https://localhost:7097/categories/${params.id}`,
+          `https://localhost:7097/sellers/${params.id}`,
         );
         setName(response.data.name);
       }
-      getCategory();
+      getSellers();
     }
   }, [params.id]);
 
-  async function createUpdateCategory(e) {
+  async function createUpdateSellers(e) {
     e.preventDefault();
 
     if (!params.id) {
-      await axios.post('https://localhost:7097/categories', {
+      await axios.post('https://localhost:7097/sellers', {
         name,
       });
     } else {
-      await axios.put(`https://localhost:7097/categories/${params.id}`, {
+      await axios.put(`https://localhost:7097/sellers/${params.id}`, {
         name,
       });
     }
     setName('');
-    navigate('/categories');
+    navigate('/sellers');
   }
 
   return (
     <div>
-      <h1 className="ml-5 text-2xl font-bold">Categorias</h1>
+      <h1 className="ml-5 text-2xl font-bold">Vendedores</h1>
 
-      <form className="m-5 w-5/6 mx-auto" onSubmit={createUpdateCategory}>
+      <form className="m-5 w-5/6 mx-auto" onSubmit={createUpdateSellers}>
         <label className="block mt-4" htmlFor="name">
           Nome
         </label>
@@ -62,4 +62,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Sellers;

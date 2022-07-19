@@ -23,7 +23,7 @@ const Payments = () => {
     }
   }, [params.id]);
 
-  async function createPayment(e) {
+  async function createUpdatePayment(e) {
     e.preventDefault();
 
     if (!params.id) {
@@ -43,7 +43,7 @@ const Payments = () => {
     <div>
       <h1 className="ml-5 text-2xl font-bold">Pagementos</h1>
 
-      <form className="m-5 w-5/6 mx-auto" onSubmit={createPayment}>
+      <form className="m-5 w-5/6 mx-auto" onSubmit={createUpdatePayment}>
         <label className="block mt-4" htmlFor="name">
           Nome
         </label>
