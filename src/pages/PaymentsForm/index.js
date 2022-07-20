@@ -41,7 +41,7 @@ const Payments = () => {
 
   return (
     <div>
-      <h1 className="ml-5 text-2xl font-bold">Pagementos</h1>
+      <h1 className="ml-5 text-2xl font-bold">Pagamentos</h1>
 
       <form className="m-5 w-5/6 mx-auto" onSubmit={createUpdatePayment}>
         <label className="block mt-4" htmlFor="name">
