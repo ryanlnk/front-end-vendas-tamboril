@@ -28,7 +28,7 @@ const Payments = () => {
   if (payments.length !== 0) {
     return (
       <>
-        <h1 className="ml-4 text-2xl font-bold">Pagementos</h1>
+        <h1 className="ml-4 text-2xl font-bold">Pagamentos</h1>
 
         <ButtonAdd add={add} />
 
