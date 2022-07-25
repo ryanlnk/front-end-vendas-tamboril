@@ -20,7 +20,7 @@ const Sidebar = () => {
           <li>
             <Link
               className="px-4 py-3 flex items-center space-x-4 bg-gray-300 rounded-xl text-gray-900 hover:text-gray-100"
-              to={'/#'}
+              to={'/sales'}
             >
               Vendas
             </Link>

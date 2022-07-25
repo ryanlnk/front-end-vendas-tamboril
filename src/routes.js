@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
+import Sales from './pages/Sales';
+import SalesForm from './pages/SalesForm';
 import Products from './pages/Products';
 import ProductsForm from './pages/ProductsForm';
 import Customers from './pages/Customers';
@@ -21,6 +23,9 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
 
       {/* Vendas */}
+      <Route path="/sales" element={<Sales />} />
+      <Route path="/salesform" element={<SalesForm />} />
+      <Route path="/salesform/:id" element={<SalesForm />} />
 
       {/* Produtos */}
       <Route path="/products" element={<Products />} />
