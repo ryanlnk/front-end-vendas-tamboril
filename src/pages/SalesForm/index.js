@@ -13,6 +13,7 @@ const Sales = () => {
   const [payments, setPayments] = useState([]);
   const [sellers, setSellers] = useState([]);
   const [banks, setBanks] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function getTables() {
@@ -25,12 +26,18 @@ const Sales = () => {
       );
 
       const responseSellers = await axios.get('https://localhost:7097/sellers');
+
       const responseBanks = await axios.get('https://localhost:7097/banks');
+
+      const responseProducts = await axios.get(
+        'https://localhost:7097/products',
+      );
 
       setCustomers(responseCustomers.data);
       setPayments(responsePayments.data);
       setSellers(responseSellers.data);
       setBanks(responseBanks.data);
+      setProducts(responseProducts.data);
     }
     getTables();
   }, []);
@@ -44,7 +51,7 @@ const Sales = () => {
         <select
           value={customerId}
           onChange={({ target }) => setCustomerId(target.value)}
-          className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          className="block w-1/2 mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
           <option value="DEFAULT" disabled>
             Selecione um cliente
@@ -57,7 +64,7 @@ const Sales = () => {
         </select>
 
         {/* Tabela para inserir produtos da venda */}
-        <table className="my-4 w-full mx-auto table-auto">
+        <table className="my-16 w-full mx-auto table-auto">
           <thead>
             <tr className="text-left border-b border-gray-300">
               <th className="px-4 py-1">Produto</th>
@@ -70,8 +77,28 @@ const Sales = () => {
 
           <tbody>
             <tr className="border-b border-gray-200 hover:bg-gray-100">
-              <td></td>
-              <td></td>
+              <td>
+                <select className="block rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                  <option value="DEFAULT" disabled>
+                    Selecione um produto
+                  </option>
+                  {products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td>
+                <input
+                  className="form-input block rounded-md border-gray-300 focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                  type="text"
+                  name="name"
+                  id="name"
+                  // value={name}
+                  // onChange={({ target }) => setName(target.value)}
+                />
+              </td>
               <td></td>
               <td></td>
               <td className="px-4 py-2 inline-flex">
@@ -89,7 +116,7 @@ const Sales = () => {
         <select
           value={paymentId}
           onChange={({ target }) => setPaymentId(target.value)}
-          className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          className="block w-1/2 mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
           <option value="DEFAULT" disabled>
             Selecione um método de pagamento
@@ -105,7 +132,7 @@ const Sales = () => {
         <select
           value={sellerId}
           onChange={({ target }) => setSellerId(target.value)}
-          className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          className="block w-1/2 mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
           <option value="DEFAULT" disabled>
             Selecione um vendedor
@@ -121,7 +148,7 @@ const Sales = () => {
         <select
           value={accountBankId}
           onChange={({ target }) => setAccountBankId(target.value)}
-          className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          className="block w-1/2 mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
           <option value="DEFAULT" disabled>
             Selecione uma conta bancária
