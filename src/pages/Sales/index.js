@@ -12,6 +12,7 @@ const Sales = () => {
     async function getSales() {
       const response = await axios.get(`https://localhost:7097/sales`);
       setSales(response.data);
+      console.log(response.data);
     }
     getSales();
   }, []);
@@ -35,6 +36,7 @@ const Sales = () => {
         <table className="m-5 w-5/6 mx-auto table-auto">
           <thead>
             <tr className="text-left border-b border-gray-300">
+              <th className="px-4 py-1">Data</th>
               <th className="px-4 py-1">Venda</th>
               <th className="px-4 py-1">Cliente</th>
               <th className="px-4 py-1">Método de pagamento</th>
@@ -50,8 +52,8 @@ const Sales = () => {
                 <td className="px-4 py-2">{sale.id}</td>
                 <td className="px-4 py-2">{sale.customer.name}</td>
                 <td className="px-4 py-2">{sale.payment.name}</td>
-                <td className="px-4 py-2"></td>
-                {/* <td className="px-4 py-2">{sale.salesHasProducts.subTotal}</td> */}
+                {/* <td className="px-4 py-2"></td> */}
+                <td className="px-4 py-2">{sale.salesHasProducts[0].subTotal}</td>
                 <td className="px-4 py-2 inline-flex">
                   <ButtonRemove
                     deleteFunction={deleteSale}

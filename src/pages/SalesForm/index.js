@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ButtonRemove from '../../components/ButtonRemove';
+import ButtonAdd from '../../components/ButtonAdd';
 import ButtonSave from '../../components/ButtonSave';
 
 const Sales = () => {
@@ -8,15 +9,22 @@ const Sales = () => {
   const [paymentId, setPaymentId] = useState('DEFAULT');
   const [sellerId, setSellerId] = useState('DEFAULT');
   const [accountBankId, setAccountBankId] = useState('DEFAULT');
+  const [products, setProducts] = useState([]);
+  const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState();
+
+  const [rows, setRows] = useState([{}]);
 
   const [customers, setCustomers] = useState([]);
   const [payments, setPayments] = useState([]);
   const [sellers, setSellers] = useState([]);
   const [banks, setBanks] = useState([]);
-  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function getTables() {
+      const responseSellers = await axios.get('https://localhost:7097/sellers');
+      const responseBanks = await axios.get('https://localhost:7097/banks');
+
       const responseCustomers = await axios.get(
         'https://localhost:7097/customers',
       );
@@ -24,10 +32,6 @@ const Sales = () => {
       const responsePayments = await axios.get(
         'https://localhost:7097/payments',
       );
-
-      const responseSellers = await axios.get('https://localhost:7097/sellers');
-
-      const responseBanks = await axios.get('https://localhost:7097/banks');
 
       const responseProducts = await axios.get(
         'https://localhost:7097/products',
@@ -41,6 +45,11 @@ const Sales = () => {
     }
     getTables();
   }, []);
+
+  function addRow(e) {
+    e.preventDefault();
+    setRows([...rows, {}]);
+  }
 
   return (
     <div>
@@ -64,7 +73,7 @@ const Sales = () => {
         </select>
 
         {/* Tabela para inserir produtos da venda */}
-        <table className="my-16 w-full mx-auto table-auto">
+        <table className="mt-16 mb-3 w-full mx-auto table-auto">
           <thead>
             <tr className="text-left border-b border-gray-300">
               <th className="px-4 py-1">Produto</th>
@@ -76,41 +85,48 @@ const Sales = () => {
           </thead>
 
           <tbody>
-            <tr className="border-b border-gray-200 hover:bg-gray-100">
-              <td>
-                <select className="block rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                  <option value="DEFAULT" disabled>
-                    Selecione um produto
-                  </option>
-                  {products.map((product) => (
-                    <option key={product.id} value={product.id}>
-                      {product.name}
+            {rows.map((row, index) => (
+              <tr
+                className="border-b border-gray-200 hover:bg-gray-100"
+                key={index}
+              >
+                <td>
+                  <select className="block rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <option value="DEFAULT" disabled>
+                      Selecione um produto
                     </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <input
-                  className="form-input block rounded-md border-gray-300 focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
-                  type="text"
-                  name="name"
-                  id="name"
-                  // value={name}
-                  // onChange={({ target }) => setName(target.value)}
-                />
-              </td>
-              <td></td>
-              <td></td>
-              <td className="px-4 py-2 inline-flex">
-                <ButtonRemove
-                // deleteFunction={deleteProduct}
-                // parameter={product.id}
-                />
-              </td>
-            </tr>
+                    {products.map((product) => (
+                      <option key={product.id} value={product.id}>
+                        {product.name}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <input
+                    className="form-input block rounded-md border-gray-300 focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={quantity}
+                    onChange={({ target }) => setQuantity(target.value)}
+                  />
+                </td>
+                <td></td>
+                <td></td>
+                <td className="px-4 py-2 inline-flex">
+                  <ButtonRemove
+                  // deleteFunction={deleteProduct}
+                  // parameter={product.id}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         {/* Fim da tabela */}
+
+        <ButtonAdd add={addRow} />
 
         <label className="block mt-4">Método de pagamento</label>
         <select
