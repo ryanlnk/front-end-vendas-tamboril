@@ -12,7 +12,6 @@ const Sales = () => {
     async function getSales() {
       const response = await axios.get(`https://localhost:7097/sales`);
       setSales(response.data);
-      console.log(response.data);
     }
     getSales();
   }, []);
@@ -47,13 +46,16 @@ const Sales = () => {
 
           <tbody>
             {sales.map((sale) => (
-              <tr className="border-b border-gray-200 hover:bg-gray-100">
+              <tr
+                className="border-b border-gray-200 hover:bg-gray-100"
+                key={sale.id}
+              >
                 <td className="px-4 py-2">{sale.date}</td>
                 <td className="px-4 py-2">{sale.id}</td>
                 <td className="px-4 py-2">{sale.customer.name}</td>
                 <td className="px-4 py-2">{sale.payment.name}</td>
-                {/* <td className="px-4 py-2"></td> */}
-                <td className="px-4 py-2">{sale.salesHasProducts[0].subTotal}</td>
+                <td className="px-4 py-2">{sale.subTotal}</td>
+                {/* <td className="px-4 py-2">{sale.salesHasProducts[0].subTotal}</td> */}
                 <td className="px-4 py-2 inline-flex">
                   <ButtonRemove
                     deleteFunction={deleteSale}

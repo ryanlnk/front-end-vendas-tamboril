@@ -10,7 +10,7 @@ const Sales = () => {
   const [sellerId, setSellerId] = useState('DEFAULT');
   const [accountBankId, setAccountBankId] = useState('DEFAULT');
   const [products, setProducts] = useState([]);
-  const [price, setPrice] = useState();
+  const [salePrice, setSalePrice] = useState(null);
   const [quantity, setQuantity] = useState();
 
   const [rows, setRows] = useState([{}]);
@@ -91,7 +91,10 @@ const Sales = () => {
                 key={index}
               >
                 <td>
-                  <select className="block rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                  <select
+                    className="block rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    onChange={({ target }) => setSalePrice(target.value)}
+                  >
                     <option value="DEFAULT" disabled>
                       Selecione um produto
                     </option>
@@ -102,17 +105,38 @@ const Sales = () => {
                     ))}
                   </select>
                 </td>
+
                 <td>
                   <input
                     className="form-input block rounded-md border-gray-300 focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="quantity"
+                    id="quantity"
                     value={quantity}
                     onChange={({ target }) => setQuantity(target.value)}
                   />
                 </td>
-                <td></td>
+
+                <td>
+                  {products.map((product) => {
+                    if (product.id == salePrice) {
+                      return product.salePrice;
+
+                      // return (
+                      //   <input
+                      //     disabled
+                      //     key={product.id}
+                      //     className="form-input block rounded-md border-gray-300 focus:border-gray-300 focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                      //     type="text"
+                      //     name="price"
+                      //     id="price"
+                      //     value={product.salePrice}
+                      //   />
+                      // );
+                    }
+                  })}
+                </td>
+
                 <td></td>
                 <td className="px-4 py-2 inline-flex">
                   <ButtonRemove
